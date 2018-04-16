@@ -1,21 +1,43 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('./logger');
 const app = express();
 
-// Add console logging
+const PORT = process.env.PORT || 5000;
+
+const requestLogger = function(req, res, next) {
+    logger.log('info', 'URL:', req.originalUrl, 'METHOD:', req.method, 'BODY:', req.body);
+    next();
+};
+
+app.use(bodyParser.json());
+app.use(requestLogger);
+app.set('view engine', 'pug');
+
 app.get('/blogs', function(req, res) {
-    const articles = [{title: 'First', body: 'First' }, {title: 'Second', body: 'Second' }];
-    res.json(articles);
+    res.json([{title: 'First', body: 'First' }, {title: 'Second', body: 'Second' }]);
 });
 
 app.get('/blogs/:id', function(req, res) {
-    const article = {title: 'First', body: 'First' };
-    res.json(article);
+    res.json({title: 'First', body: 'First' });
+});
+
+app.post('/blogs', function(req, res) {
+    res.json({ message: 'Article successfully created!' });
+});
+
+app.put('/blogs/:id', function(req, res) {
+    res.json({ message: 'Article ' + req.params.id  + ' successfully modified!' });
+});
+
+app.delete('/blogs/:id', function(req, res) {
+    res.json({ message: 'Article ' + req.params.id  + ' successfully deleted!' });
 });
 
 app.use(function(req, res) {
-    console.log('Error route: ' + req.originalUrl);
-    const error = { title: 'No route matches', description: 'No route matches for ' + req.originalUrl };
-    res.json(error);
+    res.render('404', { message: 'Route not found for ' + req.originalUrl  });
 });
 
-app.listen(8000, () => console.log('Listening app on port 8000'));
+app.listen(PORT, function() {
+    console.log('Listening app on port 8000');
+});
