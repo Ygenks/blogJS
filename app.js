@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const logger = require('./logger');
+const Blog = require('./models/blog');
 const app = express();
+
 
 const PORT = process.env.PORT || 5000;
 
@@ -39,5 +42,5 @@ app.use(function(req, res) {
 });
 
 app.listen(PORT, function() {
-    console.log('Listening app on port 8000');
+    console.log('Listening app on port ' + PORT);
 });

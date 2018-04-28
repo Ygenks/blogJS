@@ -2,7 +2,7 @@
     "name": "blogjs",
     "version": "1.0.0",
     "description": "FrontCamp blog",
-    "main": "index.js",
+    "main": "app.js",
     "dependencies": {
         "express": "^4.16.3",
         "heroku-cli": "^6.16.13",
@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "body-parser": "^1.18.2",
+        "mongoose": "^5.0.16",
         "pug": "^2.0.3",
         "winston": "^2.4.1"
     },
