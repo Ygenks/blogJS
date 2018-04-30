@@ -1,0 +1,9 @@
+include layout
+
+.container
+  form.form-signin(role='form' action='/login' method='post')
+    h2.form-signin-heading Please sign in
+    label.sr-only(for='inputEmail')
+    input#inputEmail.form-control(type='text' name='username' placeholder='Username' required='required' autofocus='autofocus')
+    input#inputPassword.form-control(type='password' name='password' placeholder='Password')
+    button.btn.btn-lg.btn-primary.btn-block(type='submit') LOGIN

@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/frontcampblog');
+const mongoURI = process.env.MONGOLAB_URI ||
+      process.env.MONGOHQ_URL ||
+      'mongodb://localhost/frontcampblog';
+
+mongoose.connect(mongoURI);
 
 const db = mongoose.connection;
 
